@@ -14,7 +14,7 @@ public class MainClinicaMédica {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		boolean sair1 = false, sair2 = false;
 		;
-		int opcao1, opcao2, opcao3;
+		int opcao1, opcao2, opcao3, opcao4;
 
 		try {
 			ObjectInputStream u = new ObjectInputStream(new FileInputStream("src/file/Utente.dat"));
