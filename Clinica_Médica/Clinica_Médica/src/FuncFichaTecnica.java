@@ -12,12 +12,12 @@ public class FuncFichaTecnica {
 
 		if (opcao.toUpperCase().equals("SIM")) {
 			for (int i = 0; i < FT.size(); i++) {
-				if (FT.get(i).getNumero() == u.getNumero()) {
+				if (FT.get(i).getNUS() == u.getNUS()) {
 					FT.remove(i);
 				}
 			}
 
-			FT.add(new Ficha_Tecnica(u, u.getNumero()));
+			FT.add(new Ficha_Tecnica(u));
 			System.out.println("Ficha Técnica criada com sucesso");
 
 		} else if (opcao.toUpperCase().equals("NÃO")) {
@@ -33,7 +33,7 @@ public class FuncFichaTecnica {
 	
 	public static void editarFT(ArrayList<Ficha_Tecnica> FT, Utente u) {
 		for (int i = 0; i < FT.size(); i++) {
-			if (FT.get(i).getNumero() == u.getNumero()) {
+			if (FT.get(i).getNUS() == u.getNUS()) {
 				System.out.println("Deseja adicionar quantos medicamentos?");
 				int nm = Ler.umInt();
 				
@@ -69,7 +69,7 @@ public class FuncFichaTecnica {
 
 	public static void atualizarfileFT(ArrayList<Ficha_Tecnica> FT) {
 		try {
-			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("src/file/Ficha_Tecnica.dat"));
+			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("src/file/FichaTecnica.dat"));
 			os.writeObject(FT);
 			os.flush();
 		} catch (IOException e) {

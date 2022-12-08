@@ -34,6 +34,14 @@ public class Profissional implements Serializable{
 
 		}
 	}
+	
+	public static int getUltimo() {
+		return ultimo;
+	}
+
+	public static void setUltimo(int ultimo) {
+		Profissional.ultimo = ultimo;
+	}
 
 	public long getNumero() {
 		return numero;

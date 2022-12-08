@@ -12,36 +12,52 @@ public class MainClinicaMédica {
 		ArrayList<Ficha_Tecnica> ficha_tecnica = new ArrayList<>();
 		ArrayList<Profissional> profissionais = new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		boolean sair1 = false, sair2 = false;
+		boolean sair1, sair2;
 		;
-		int opcao1, opcao2, opcao3, opcao4;
+		int opcao1, opcao2, opcao3;
 
 		try {
 			ObjectInputStream u = new ObjectInputStream(new FileInputStream("src/file/Utente.dat"));
-			int ult1 = u.readInt();
-			Utente.setUltimo(ult1);
 			utentes = (ArrayList<Utente>) u.readObject();
-
-			ObjectInputStream p = new ObjectInputStream(new FileInputStream("src/file/Profissional.dat"));
-			int ult2 = p.readInt();
-			Utente.setUltimo(ult2);
-			profissionais = (ArrayList<Profissional>) p.readObject();
-
-			ObjectInputStream c = new ObjectInputStream(new FileInputStream("src/file/Consulta.dat"));
-			consultas = (ArrayList<Consulta>) c.readObject();
-
-			ObjectInputStream f = new ObjectInputStream(new FileInputStream("src/file/Ficha_Tecnica.dat"));
-			ficha_tecnica = (ArrayList<Ficha_Tecnica>) f.readObject();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		} catch (ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
-
+		
+		try {
+			ObjectInputStream p = new ObjectInputStream(new FileInputStream("src/file/Profissional.dat"));
+			int ult2 = p.readInt();
+			Profissional.setUltimo(ult2);
+			profissionais = (ArrayList<Profissional>) p.readObject();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			ObjectInputStream c = new ObjectInputStream(new FileInputStream("src/file/Consulta.dat"));
+			consultas = (ArrayList<Consulta>) c.readObject();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			ObjectInputStream ft = new ObjectInputStream(new FileInputStream("src/file/FichaTecnica.dat"));
+			ficha_tecnica = (ArrayList<Ficha_Tecnica>) ft.readObject();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		sair1 = false;
 		while (!sair1) {
 			menu.Principal();
 			opcao1 = Ler.umInt();
-
 			switch (opcao1) {
 			case 1:
 				menu.Utente1(utentes);
@@ -55,11 +71,12 @@ public class MainClinicaMédica {
 					for (int i = 0; i < utentes.size(); i++) {
 						System.out.print(utentes.get(i).toString());
 					}
-					System.out.println("\nDeseja realizar operações com que Utente? (Inserir Nº de Clínica)");
-					long numero = Ler.umLong();
+					System.out.println("\nDeseja realizar operações com que Utente? (Inserir NUS)");
+					long NUS = Ler.umLong();
 
 					for (int i = 0; i < utentes.size(); i++) {
-						if (utentes.get(i).getNumero() == numero) {
+						if (utentes.get(i).getNUS() == NUS) {
+							sair2 = false;
 							while (!sair2) {
 								menu.Utente2();
 								opcao3 = Ler.umInt();
@@ -80,7 +97,7 @@ public class MainClinicaMédica {
 									break;
 								case 5:
 									for (int j = 0; j < ficha_tecnica.size(); j++) {
-										if (ficha_tecnica.get(j).getNumero() == utentes.get(i).getNumero()) {
+										if (ficha_tecnica.get(j).getNUS() == utentes.get(i).getNUS()) {
 											System.out.println(ficha_tecnica.get(j).toString());
 										}
 									}

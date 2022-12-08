@@ -63,7 +63,6 @@ public class FuncUtentes {
 	public static void atualizarfileU(ArrayList<Utente> u) {
 		try {
 			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("src/file/Utente.dat"));
-			os.writeInt(Utente.getUltimo());
 			os.writeObject(u);
 			os.flush();
 		} catch (IOException e) {

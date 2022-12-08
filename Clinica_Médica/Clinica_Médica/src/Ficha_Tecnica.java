@@ -5,23 +5,22 @@ public class Ficha_Tecnica extends Utente implements Serializable {
 	ArrayList<String> alergias;
 	ArrayList<Consulta> consultas;
 	ArrayList<String> medicamentos;
-	long numero;
+	long NUS;
 	
-	public Ficha_Tecnica(Utente u, long numero) {
+	public Ficha_Tecnica(Utente u) {
 		super(u.getNome(), u.getNUS(), u.getGenero());
-		this.numero = numero;
-		
+		this.NUS = u.getNUS();
 		alergias = new ArrayList<>();
 		consultas = new ArrayList<>();
 		medicamentos = new ArrayList<>();
 	}
 	
-	public long getNumero() {
-		return numero;
+	public long getNUS() {
+		return NUS;
 	}
 
-	public void setNumero(long numero) {
-		this.numero = numero;
+	public void setNUS(long NUS) {
+		this.NUS = NUS;
 	}
 	
 	public void addConsulta(Consulta c) {
@@ -64,7 +63,7 @@ public class Ficha_Tecnica extends Utente implements Serializable {
 	};
 	
 	public String toString() {
-		return "Número de Clinica: " + numero + ", Utente: " + super.getNome() + "\nAlergias: " + alergias.toString() + "\nMedicamentos: " + medicamentos.toString() + "\nConsultas: " + consultas.toString();
+		return "NUS: " + NUS + ", Utente: " + super.getNome() + "\nAlergias: " + alergias.toString() + "\nMedicamentos: " + medicamentos.toString() + "\nConsultas: " + consultas.toString();
 	}
 	
 	
