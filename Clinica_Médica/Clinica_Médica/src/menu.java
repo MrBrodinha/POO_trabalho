@@ -30,7 +30,7 @@ public class menu {
 		System.out.println("4 - Criar Ficha Técnica para Utente");
 		System.out.println("5 - Ver Ficha Técnica de Utente");
 		System.out.println("6 - Editar Ficha Técnica de Utente (Medicamentos / Alergias)");
-		
 		System.out.println("7 - Voltar atrás");
+		System.out.println("AVISO: Para editar/adicionar consultas é no menu principal");
 	}
 }
