@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Profissional implements Serializable{
+public class Profissional implements Serializable {
 	static int ultimo = 0; // número profissional
 	private long numero;
 	private String nome;
@@ -35,6 +35,23 @@ public class Profissional implements Serializable{
 		}
 	}
 	
+	//public void removerConsulta(){}
+
+	public void addHab(String h) {
+		if (!hab.contains(h)) {
+			hab.add(h);
+		}
+	}
+
+	public void removerHab(String h) {
+		for (int i = 0; i < hab.size(); i++) {
+			if (hab.get(i).contains(h)) {
+				hab.remove(i);
+			}
+		}
+
+	}
+
 	public static int getUltimo() {
 		return ultimo;
 	}
@@ -84,7 +101,8 @@ public class Profissional implements Serializable{
 	public boolean equals(Object obj) {
 		if (obj != null && obj.getClass() == this.getClass()) {
 			Profissional temp = (Profissional) obj;
-			return nome.equals(temp.nome) && numero == temp.numero && hab.equals(temp.hab) && consultas.equals(temp.consultas);
+			return nome.equals(temp.nome) && numero == temp.numero && hab.equals(temp.hab)
+					&& consultas.equals(temp.consultas);
 		}
 		return false;
 	}
@@ -97,5 +115,4 @@ public class Profissional implements Serializable{
 		temp.numero = numero;
 		return temp;
 	}
-
 }

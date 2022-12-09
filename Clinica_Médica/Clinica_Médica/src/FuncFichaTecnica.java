@@ -1,23 +1,14 @@
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class FuncFichaTecnica {
-	public static void criarFT(ArrayList<Ficha_Tecnica> FT, Utente u) {
+	public static void criarFT(ArrayList<Utente> u, int i) {
 		String opcao;
 		System.out.println(
 				"Aviso: Se o Utente já tem ficha técnica, criando uma nova vai eliminar a existente, deseja continuar? (Sim/Não)");
 		opcao = Ler.umaString();
 
 		if (opcao.toUpperCase().equals("SIM")) {
-			for (int i = 0; i < FT.size(); i++) {
-				if (FT.get(i).getNUS() == u.getNUS()) {
-					FT.remove(i);
-				}
-			}
-
-			FT.add(new Ficha_Tecnica(u));
+			u.get(i).criarFT();
 			System.out.println("Ficha Técnica criada com sucesso");
 
 		} else if (opcao.toUpperCase().equals("NÃO")) {
@@ -28,52 +19,77 @@ public class FuncFichaTecnica {
 			return;
 		}
 
-		atualizarfileFT(FT);
-	}
-	
-	public static void editarFT(ArrayList<Ficha_Tecnica> FT, Utente u) {
-		for (int i = 0; i < FT.size(); i++) {
-			if (FT.get(i).getNUS() == u.getNUS()) {
-				System.out.println("Deseja adicionar quantos medicamentos?");
-				int nm = Ler.umInt();
-				
-				for(int j = 1; j <= nm; j++) {
-					if(j==1) {
-						System.out.println("Insira os medicamentos: (Caso eles já se encontrem na lista, não iremos adicionar");
-					}
-					
-					String nome = Ler.umaString();
-					
-					if(!FT.get(i).getMedicamentos().contains(nome)) {
-						FT.get(i).addMedicamentos(nome);
-					}
-				}
-				
-				System.out.println("Deseja adicionar quantas Alergias?");
-				nm = Ler.umInt();
-				
-				for(int j = 1; j <= nm; j++) {
-					if(j==1) {
-						System.out.println("Insira as Alergias: (Caso elas já se encontrem na lista, não iremos adicionar");
-					}
-					String nome = Ler.umaString();
-					
-					if(!FT.get(i).getAlergias().contains(nome)) {
-						FT.get(i).addAlergias(nome);
-					}
-				}
-			}
-		}
-		atualizarfileFT(FT);
+		FuncUtentes.atualizarfileU(u);
 	}
 
-	public static void atualizarfileFT(ArrayList<Ficha_Tecnica> FT) {
-		try {
-			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("src/file/FichaTecnica.dat"));
-			os.writeObject(FT);
-			os.flush();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
+	public static void Medicamentos(ArrayList<Utente> u, int i) {
+		System.out.println("Medicamentos: " + u.get(i).getFT().getMedicamentos().toString());
+		System.out.println("Deseja remover ou adicionar medicamentos? (adicionar/remover)");
+		String opcao = Ler.umaString();
+		int nm;
+
+		if (opcao.toUpperCase().equals("ADICIONAR")) {
+			System.out.println("Deseja adicionar quantos medicamentos?");
+			nm = Ler.umInt();
+			for (int j = 1; j <= nm; j++) {
+				if (j == 1) {
+					System.out.println(
+							"Insira os medicamentos: (Caso eles já se encontrem na lista, não iremos adicionar");
+				}
+				String nome = Ler.umaString();
+				u.get(i).getFT().addMedicamentos(nome);
+				
+			}
+		} else if (!opcao.toUpperCase().equals("ADICIONAR")) {
+			System.out.println("Deseja remover quantos medicamentos?");
+			nm = Ler.umInt();
+			for (int j = 1; j <= nm; j++) {
+				if (j == 1) {
+					System.out.println("Insira os medicamentos: ");
+				}
+				String nome = Ler.umaString();
+				u.get(i).getFT().removeMedicamentos(nome);
+			}
 		}
+		else {
+			System.out.println("Opção inválida, voltando ao menu...");
+		}
+		FuncUtentes.atualizarfileU(u);
 	}
+	
+	public static void Alergias(ArrayList<Utente> u, int i) {
+		System.out.println("Alergias: " + u.get(i).getFT().getAlergias().toString());
+		System.out.println("Deseja remover ou adicionar Alergias? (adicionar/remover)");
+		String opcao = Ler.umaString();
+		int nm;
+
+		if (opcao.toUpperCase().equals("ADICIONAR")) {
+			System.out.println("Deseja adicionar quantas alergias?");
+			nm = Ler.umInt();
+			for (int j = 1; j <= nm; j++) {
+				if (j == 1) {
+					System.out.println(
+							"Insira as alergias: (Caso eles já se encontrem na lista, não iremos adicionar");
+				}
+				String nome = Ler.umaString();
+				u.get(i).getFT().addAlergias(nome);
+				
+			}
+		} else if (!opcao.toUpperCase().equals("ADICIONAR")) {
+			System.out.println("Deseja remover quantas alergias?");
+			nm = Ler.umInt();
+			for (int j = 1; j <= nm; j++) {
+				if (j == 1) {
+					System.out.println("Insira os alergias: ");
+				}
+				String nome = Ler.umaString();
+				u.get(i).getFT().removeAlergias(nome);
+			}
+		}
+		else {
+			System.out.println("Opção inválida, voltando ao menu...");
+		}
+		FuncUtentes.atualizarfileU(u);
+	}
+
 }

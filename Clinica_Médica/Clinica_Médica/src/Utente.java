@@ -5,6 +5,7 @@ public class Utente implements Serializable {
 	private char genero; // F ou M
 	private long NUS; //nº de utente de saúde;
 	private Profissional medico_familia;
+	private Ficha_Tecnica ft;
 	
 	public Utente(String nome, long NUS, char genero) {
 		this.nome = nome;
@@ -45,7 +46,13 @@ public class Utente implements Serializable {
 		medico_familia = (Profissional) m_f;
 	}
 	
+	public void criarFT() {
+		ft = new Ficha_Tecnica(nome, NUS);
+	}
 	
+	public Ficha_Tecnica getFT() {
+		return ft;
+	}
 	//mexer no final quando tiver tudo mais feito
 	public String toString() {
 		return "NUS: " + NUS + ", nome: " + nome + ", género: " + genero +  "\n";
@@ -55,7 +62,7 @@ public class Utente implements Serializable {
 	public boolean equals(Object obj) {
 		if(obj != null && obj.getClass() == this.getClass()) {
 			Utente temp = (Utente) obj;
-			return nome.equals(temp.nome) && NUS == temp.NUS && genero == temp.genero && medico_familia.equals(temp.medico_familia);
+			return nome.equals(temp.nome) && NUS == temp.NUS && genero == temp.genero && medico_familia.equals(temp.medico_familia) && ft.equals(temp.ft);
 		}
 		return false;
 	}
@@ -63,6 +70,7 @@ public class Utente implements Serializable {
 	public Object clone() {
 		Utente temp = new Utente(nome, NUS, genero);
 		temp.medico_familia = (Profissional) medico_familia.clone();
+		temp.ft = (Ficha_Tecnica) ft.clone();
 		return temp;
 	}
 	

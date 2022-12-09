@@ -60,6 +60,7 @@ public class FuncUtentes {
 		atualizarfileU(u);
 	}
 
+
 	public static void atualizarfileU(ArrayList<Utente> u) {
 		try {
 			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("src/file/Utente.dat"));
