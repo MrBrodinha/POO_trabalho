@@ -172,7 +172,11 @@ public class MainClinicaMédica {
 
 							switch (opcao3) {
 							case 1:
-								// FuncConsulta(consultas, utentes.get(i), profissionais);
+								System.out.println(utentes.get(i).getFT().getConsultas().toString());
+								break;
+							case 2:
+								break;
+							case 3:
 								break;
 							case 4:
 								sair2 = true;

@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FuncConsulta {
-	public static void criarConsulta(ArrayList<Consulta> consultas,  Utente u, ArrayList<Profissional> p) {
+	public static void criarC(ArrayList<Consulta> consultas,  Utente u, ArrayList<Profissional> p) {
 			System.out.println("Qual o nome do Profissional? ");
 			String nomeP = Ler.umaString();
 
@@ -22,8 +22,9 @@ public class FuncConsulta {
 
 	}
 
-	public static void removerC(ArrayList<Consulta> consultas) {
-		System.out.println("Qual o nome do utente? ");
+	public static void removerC(ArrayList<Consulta> c, ArrayList<Utente> u, int i, ArrayList<Profissional> p) {
+		System.out.println("Consultas: " + u.get(i));
+		System.out.println("Qual o nome do Profissional responsável pela consulta? ");
 		String nom = Ler.umaString();
 
 		System.out.println("Qual a data? Formato:yyyy-MM-dd HH:mm ");
@@ -32,19 +33,21 @@ public class FuncConsulta {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime data = LocalDateTime.parse(nomeData, formatter);
 
-		for (int i = 0; i < consultas.size(); i++) {
-			if (consultas.get(i).getNomeU() == nom && consultas.get(i).getData().equals(data)) {
-				consultas.remove(i);
+		for (int j = 0; j < c.size(); j++) {
+			if (c.get(j).getNomeU() == nom && c.get(j).getData().equals(data)) {
+				c.remove(j);
 			}
 		}
-
-		atualizarfileC(consultas);
+		
+		FuncUtentes.atualizarfileU(u);
+		FuncProfissional.atualizarfileP(p);
+		atualizarfileC(c);
 	}
 
-	public static void atualizarfileC(ArrayList<Consulta> consultas) {
+	public static void atualizarfileC(ArrayList<Consulta> c) {
 		try {
 			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("src/file/Consulta.dat"));
-			os.writeObject(consultas);
+			os.writeObject(c);
 			os.flush();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());

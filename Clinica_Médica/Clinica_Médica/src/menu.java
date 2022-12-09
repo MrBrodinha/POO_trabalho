@@ -46,8 +46,8 @@ public class menu {
 	}
 	
 	public static void Consulta1() {
-		System.out.println("\nQue operações deseja realizar com as Consulas?");
-		System.out.println("1 - Ver Consulta");
+		System.out.println("\nQue operações deseja realizar com as Consultas?");
+		System.out.println("1 - Ver Consultas");
 		System.out.println("2 - Remover Consulta");
 		System.out.println("3 - Editar Consulta");
 		System.out.println("4 - Voltar ao Menu");
