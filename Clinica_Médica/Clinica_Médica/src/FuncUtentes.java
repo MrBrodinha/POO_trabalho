@@ -33,7 +33,21 @@ public class FuncUtentes {
 
 		atualizarfileU(u);
 	}
-
+	
+	public static void NrHeM(ArrayList<Utente> u) {
+	int macho = 0;
+	int femia = 0;
+		for (int i = 0; i < u.size(); i++) {
+			if (u.get(i).getGenero() == 'M'){
+			macho ++; 
+		}
+			else {
+				femia++;
+			}
+		System.out.println("Existem "+macho+"homens na clinica e "+femia+"mulheres");
+	}}
+	
+	
 	public static void editarU(ArrayList<Utente> u, int ind) {
 		boolean end_loop = false;
 
@@ -59,7 +73,7 @@ public class FuncUtentes {
 		
 		atualizarfileU(u);
 	}
-
+	
 
 	public static void atualizarfileU(ArrayList<Utente> u) {
 		try {

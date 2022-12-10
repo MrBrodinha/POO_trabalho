@@ -40,7 +40,7 @@ public class FuncFichaTecnica {
 				u.get(i).getFT().addMedicamentos(nome);
 				
 			}
-		} else if (!opcao.toUpperCase().equals("ADICIONAR")) {
+		} else if (!opcao.toUpperCase().equals("REMOVER")) {
 			System.out.println("Deseja remover quantos medicamentos?");
 			nm = Ler.umInt();
 			for (int j = 1; j <= nm; j++) {
@@ -75,12 +75,12 @@ public class FuncFichaTecnica {
 				u.get(i).getFT().addAlergias(nome);
 				
 			}
-		} else if (!opcao.toUpperCase().equals("ADICIONAR")) {
+		} else if (!opcao.toUpperCase().equals("REMOVER")) {
 			System.out.println("Deseja remover quantas alergias?");
 			nm = Ler.umInt();
 			for (int j = 1; j <= nm; j++) {
 				if (j == 1) {
-					System.out.println("Insira os alergias: ");
+					System.out.println("Insira as alergias: ");
 				}
 				String nome = Ler.umaString();
 				u.get(i).getFT().removeAlergias(nome);

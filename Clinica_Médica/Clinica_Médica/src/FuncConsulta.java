@@ -6,20 +6,35 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FuncConsulta {
-	public static void criarC(ArrayList<Consulta> consultas,  Utente u, ArrayList<Profissional> p) {
-			System.out.println("Qual o nome do Profissional? ");
-			String nomeP = Ler.umaString();
+	public static void criarC(ArrayList<Consulta> c, ArrayList<Utente> u, int ui, ArrayList<Profissional> p, int pi)
+			throws ConsultaInvalida {
 
-			for(int i = 0; i < p.size(); i++) {
-				if(p.get(i).getNome().equals(nomeP)) {
-					System.out.println("Qual a data? Formato:yyyy-MM-dd HH:mm ");
-					String nomeData = Ler.umaString();
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-					LocalDateTime data = LocalDateTime.parse(nomeData, formatter);
-				}
+		System.out.println("Qual a data? Formato:yyyy-MM-dd HH:mm ");
+		String nomeData = Ler.umaString();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime data = LocalDateTime.parse(nomeData, formatter);
+		LocalDateTime data1 = LocalDateTime.parse(nomeData, formatter);
+		
+		System.out.println(data.isEqual(data1));
+
+		for (int j = 0; j < p.get(pi).getConsultas().size(); j++) {
+			if (p.get(pi).getConsultas().get(j).getData().isEqual(data)) {
+				throw new ConsultaInvalida("Profissional já tem consulta marcada a essa hora");
 			}
-		atualizarfileC(consultas);
+		}
 
+		for (int j = 0; j < u.get(ui).getFT().getConsultas().size(); j++) {
+			if (u.get(ui).getFT().getConsultas().get(j).getData().isEqual(data)) {
+				throw new ConsultaInvalida("Utente já tem consulta marcada a essa hora");
+			}
+		}
+
+		Consulta c1 = new Consulta(u.get(ui), p.get(pi), data);
+		c.add(c1);
+		u.get(ui).getFT().addConsulta(c1);
+		p.get(pi).addConsulta(c1);
+		System.out.println("Consulta criada com sucesso");
+		atualizarfileC(c);
 	}
 
 	public static void removerC(ArrayList<Consulta> c, ArrayList<Utente> u, int i, ArrayList<Profissional> p) {
@@ -33,12 +48,8 @@ public class FuncConsulta {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime data = LocalDateTime.parse(nomeData, formatter);
 
-		for (int j = 0; j < c.size(); j++) {
-			if (c.get(j).getNomeU() == nom && c.get(j).getData().equals(data)) {
-				c.remove(j);
-			}
-		}
-		
+
+
 		FuncUtentes.atualizarfileU(u);
 		FuncProfissional.atualizarfileP(p);
 		atualizarfileC(c);

@@ -12,7 +12,6 @@ public class MainClinicaMédica {
 		ArrayList<Profissional> profissionais = new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		boolean sair1, sair2, sair3, sair4;
-		;
 		int opcao1, opcao2, opcao3, opcao4;
 
 		try {
@@ -46,6 +45,7 @@ public class MainClinicaMédica {
 
 		sair1 = false;
 		while (!sair1) {
+			System.out.println(profissionais.toString());
 			menu.Principal();
 			opcao1 = Ler.umInt();
 			switch (opcao1) {
@@ -81,6 +81,7 @@ public class MainClinicaMédica {
 									case 2:
 										utentes.remove(i);
 										FuncUtentes.atualizarfileU(utentes);
+										sair3 = true;
 										break;
 
 									case 3:
@@ -187,6 +188,47 @@ public class MainClinicaMédica {
 				}
 				break;
 			case 3:
+				if(utentes.size() != 0 && profissionais.size() != 0) {
+					int ui = -1, pi = -1;
+					System.out.println("\nInsira o NUS do utente a que deseja marcar a consulta");
+					NUS = Ler.umLong();
+					for (int i = 0; i < utentes.size(); i++) {
+						if(utentes.get(i).getNUS() == NUS && utentes.get(i).getFT() == null) {
+							System.out.println("Utente não tem Ficha Técnica! Voltando ao menu...");
+							System.out.println("Sugestão: Para criar uma Ficha Técnica, selecione \"Operações com Utentes\" e se seguida \"Editar Utente\" ");
+						}
+					else if (utentes.get(i).getNUS() == NUS) {
+							ui = i;
+							i = utentes.size();
+						} else if (utentes.size() - 1 == i) {
+							System.out.println("Inseriu o NUS de um utente inexistente, voltando ao menu....");
+						}
+					}
+					if (ui != -1) {
+						System.out
+								.println("\nInsira o nu"
+										+ "mero completo registado do Profissional que vai realizar a consulta");
+						long numero = Ler.umLong();
+						for (int i = 0; i < profissionais.size(); i++) {
+							if (profissionais.get(i).getNumero() == numero) {
+								pi = i;
+								i = profissionais.size();
+							} else if (profissionais.size() - 1 == i) {
+								System.out.println("Inseriu o nome de um profissional inexistente, voltando ao menu...");
+							}
+						}
+						if (pi != -1) {
+							try {
+								FuncConsulta.criarC(consultas, utentes, ui, profissionais, pi);
+							} catch (ConsultaInvalida e) {
+								System.out.println(e.getMessage());
+							}
+						}
+					}
+				}
+				else {System.out.println("Não existem Utentes ou Profissionais suficientes nesta Clinica para marcar Consulta");}
+				break;
+			case 4:
 				sair1 = true;
 				break;
 			}

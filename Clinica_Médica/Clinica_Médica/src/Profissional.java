@@ -2,9 +2,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Profissional implements Serializable {
-	static int ultimo = 0; // número profissional
+	private static int ultimo = 0; // número profissional
 	private long numero;
 	private String nome;
+	private float salario;
 	private ArrayList<String> hab; // Habilitações
 	private ArrayList<Consulta> consultas;
 
@@ -13,29 +14,20 @@ public class Profissional implements Serializable {
 		nome = "";
 		hab = new ArrayList<>();
 		consultas = new ArrayList<>();
+		salario = 0;
 	}
 
-	public Profissional(String nome) {
+	public Profissional(String nome, float salario) {
 		numero = ++ultimo;
+		this.salario = salario;
 		this.nome = nome;
 		hab = new ArrayList<>();
 		consultas = new ArrayList<>();
 	}
 
 	public void addConsulta(Consulta c) {
-		for (int i = 0; i < consultas.size(); i++) {
-			if (consultas.get(i).equals(c)) {
-				System.out.println("Consulta já se encontra marcada!");
-			} else if (consultas.get(i).getData().equals(c.getData())) {
-				System.out.println("Já existe uma consulta nessa data");
-			} else {
-				consultas.add(c);
-			}
-
-		}
+		consultas.add(c);
 	}
-	
-	//public void removerConsulta(){}
 
 	public void addHab(String h) {
 		if (!hab.contains(h)) {
@@ -49,7 +41,6 @@ public class Profissional implements Serializable {
 				hab.remove(i);
 			}
 		}
-
 	}
 
 	public static int getUltimo() {
@@ -58,6 +49,14 @@ public class Profissional implements Serializable {
 
 	public static void setUltimo(int ultimo) {
 		Profissional.ultimo = ultimo;
+	}
+	
+	public float getSalario() {
+		return salario;
+	}
+
+	public void setSalario(float salario) {
+		this.salario = salario;
 	}
 
 	public long getNumero() {
@@ -102,17 +101,18 @@ public class Profissional implements Serializable {
 		if (obj != null && obj.getClass() == this.getClass()) {
 			Profissional temp = (Profissional) obj;
 			return nome.equals(temp.nome) && numero == temp.numero && hab.equals(temp.hab)
-					&& consultas.equals(temp.consultas);
+					&& consultas.equals(temp.consultas) && salario == temp.salario;
 		}
 		return false;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Object clone() {
-		Profissional temp = new Profissional(nome);
+		Profissional temp = new Profissional(nome, salario);
 		temp.hab = (ArrayList<String>) hab.clone();
 		temp.consultas = (ArrayList<Consulta>) consultas.clone();
 		temp.numero = numero;
+		temp.salario = salario;
 		return temp;
 	}
 }
