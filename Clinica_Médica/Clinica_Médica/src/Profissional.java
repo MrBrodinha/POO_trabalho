@@ -94,7 +94,7 @@ public class Profissional implements Serializable {
 	}
 
 	public String toString() {
-		return "Nº Profissional: " + numero + "\nNome: " + nome + "\nHabilitações: " + hab.toString();
+		return "Nº Profissional: " + numero + ", Nome: " + nome +  ", Salário: " + salario + "\nHabilitações: " + hab.toString();
 	}
 
 	public boolean equals(Object obj) {

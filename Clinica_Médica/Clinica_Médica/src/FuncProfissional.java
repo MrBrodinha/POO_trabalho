@@ -12,9 +12,9 @@ public class FuncProfissional {
 		String nomeP = Ler.umaString();
 		
 		System.out.println("Qual o salário do Profissional?");
-		float jj = Ler.umFloat();
+		float sal = Ler.umFloat();
 
-		p.add(new Profissional(nomeP, jj));
+		p.add(new Profissional(nomeP, sal));
 
 		atualizarfileP(p);
 
@@ -50,51 +50,53 @@ public class FuncProfissional {
 		}
 		System.out.println("Profissional com mais habilitações é "+nome+" com "+maior+" habilitações.");
 	}
-	public static void editarnomeP(ArrayList<Profissional> p, int ind) {
-		System.out.println("Insira o novo nome de Paciente:");
+	public static void editarnomeP(ArrayList<Profissional> p, int pi) {
+		System.out.println("Insira o novo nome de Profissional:");
 		String nome = Ler.umaString();
 
-		p.get(ind).setNome(nome);
+		p.get(pi).setNome(nome);
 
 		atualizarfileP(p);
 	}
-	public static void editarSalario(ArrayList<Profissional> p, int ind) {
+	public static void editarSalario(ArrayList<Profissional> p, int pi) {
 		System.out.println("Insira o novo salário:");
-		float ni = Ler.umFloat();
+		float sal = Ler.umFloat();
 
 		
-		p.get(ind).setSalario(ni);
+		p.get(pi).setSalario(sal);
 		
 		
 		atualizarfileP(p);
 	}
+	
+	public static void hab(ArrayList<Profissional> p, int pi) {
+		System.out.println("Habilitações " + p.get(pi).getHab().toString());
+		System.out.println("Deseja remover ou adicionar Habilitações? (adicionar/remover)");
+		String opcao = Ler.umaString();
+		int nm;
+		
+		if(opcao.toUpperCase().equals("ADICIONAR")) {
+			System.out.println("Deseja adicionar quantas habilitações?");
+			nm = Ler.umInt();
+			
+			for(int i = 0; i < nm; i++) {
+				System.out.println("Que habilitação deseja adicionar?");
+				String hab = Ler.umaString();
 
-	public static void addHab(ArrayList<Profissional> p, int ind) {
-		System.out.println("Que habilitação deseja adicionar?");
-		String hab = Ler.umaString();
-
-		p.get(ind).addHab(hab);
-	}
-
-	public static void remHab(ArrayList<Profissional> p, int ind) {
-		System.out.println("Que habilitação deseja remover?");
-		String hab = Ler.umaString();
-
-		p.get(ind).removerHab(hab);
-
-	}
-
-	public static void removerP(ArrayList<Profissional> p) {
-		System.out.println("Qual o número do profissional? ");
-		int id = Ler.umInt();
-
-		for (int i = 0; i < p.size(); i++) {
-			if (p.get(i).getNumero() == id) {
-				p.remove(i);
+				p.get(pi).addHab(hab);
 			}
 		}
+		else if(opcao.toUpperCase().equals("REMOVER")) {
+			System.out.println("Deseja remover quantas habilitações?");
+			nm = Ler.umInt();
+			
+			for(int i = 0; i < nm; i++) {
+				System.out.println("Que habilitação deseja remover?");
+				String hab = Ler.umaString();
 
-		atualizarfileP(p);
+				p.get(pi).removerHab(hab);
+			}
+		}
 	}
 
 	public static void atualizarfileP(ArrayList<Profissional> p) {

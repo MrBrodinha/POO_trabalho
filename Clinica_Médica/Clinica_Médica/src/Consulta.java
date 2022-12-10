@@ -19,9 +19,25 @@ public class Consulta implements Serializable {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
+	
+	public Utente getUtente() {
+		return u;
+	}
+	
+	public void setUtente(Utente u) {
+		this.u = (Utente) u.clone();
+	}
+	
+	public Profissional getProfissional() {
+		return p;
+	}
+	
+	public void setProfissional(Profissional p) {
+		this.p = (Profissional) p.clone();
+	}
 
 	public String toString() {
-		return "Data da Consulta: " + data + "\nCom o Profissional: " + p.getNome() + "\nPara o utente: " + u.getNome();
+		return "Consulta: Dia " + data + " com o Profissional " + p.getNome() + " para o Utente " + u.getNome();
 	}
 
 	public boolean equals(Object obj) {

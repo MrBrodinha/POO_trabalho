@@ -55,7 +55,7 @@ public class Utente implements Serializable {
 	}
 	//mexer no final quando tiver tudo mais feito
 	public String toString() {
-		return "NUS: " + NUS + ", nome: " + nome + ", género: " + genero +  "\n";
+		return "NUS: " + NUS + ", nome: " + nome + ", género: " + genero;
 	}
 	
 	
