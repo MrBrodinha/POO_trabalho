@@ -48,7 +48,7 @@ public class Consulta implements Serializable {
 	}
 
 	public String toString() {
-		return "\nConsulta: Dia " + data + " com o Profissional \"" + p.getNome() + "\" para o Utente \"" + u.getNome()
+		return "Consulta: Dia " + data + " com o Profissional \"" + p.getNome() + "\" para o Utente \"" + u.getNome()
 				+ "\"\nMotivo: \"" + motivo + "\"";
 	}
 

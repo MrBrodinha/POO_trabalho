@@ -6,7 +6,9 @@ public class menu {
 		System.out.println("1 - Marcar/Desmarcar Consulta");
 		System.out.println("2 - Operações com Utentes");
 		System.out.println("3 - Operações com Profissionais");
-		System.out.println("5 - Sair");
+		System.out.println("4 - Estatísticas");
+		System.out.println("5 - Consultas Total");
+		System.out.println("6 - Sair");
 	}
 
 	public static void Utente1(ArrayList<Utente> u) {
@@ -44,7 +46,7 @@ public class menu {
 	}
 
 	public static void consulta() {
-		System.out.println("Quer marcar ou desmarcar uma consulta?");
+		System.out.println("\nQuer marcar ou desmarcar uma consulta?");
 		System.out.println("1 - Marcar");
 		System.out.println("2 - Desmarcar");
 		System.out.println();
@@ -86,4 +88,5 @@ public class menu {
 			System.out.println(p.get(i).toString());
 		}
 	}
+
 }

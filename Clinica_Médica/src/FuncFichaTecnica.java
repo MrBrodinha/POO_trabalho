@@ -2,14 +2,15 @@ import java.util.ArrayList;
 
 public class FuncFichaTecnica {
 	public static void Medicamentos(ArrayList<Utente> u, int i) {
-		System.out.println("Quer adicionar ou remover medicamentos");
+		System.out.println("\nQuer adicionar ou remover medicamentos");
 		System.out.println("1 - Adicionar");
 		System.out.println("2 - Remover");
 		int opcao = Ler.umInt();
-		System.out.println("Quantos?");
-		int nm = Ler.umInt();
+		int nm;
 
 		if (opcao == 1) {
+			System.out.println("Quantos?");
+			nm = Ler.umInt();
 			for (int j = 1; j <= nm; j++) {
 				if (j == 1) {
 					System.out.println(
@@ -20,6 +21,8 @@ public class FuncFichaTecnica {
 				
 			}
 		} else if (opcao == 2) {
+			System.out.println("Quantos?");
+			nm = Ler.umInt();
 			for (int j = 1; j <= nm; j++) {
 				if (j == 1) {
 					System.out.println("Insira os medicamentos: ");
@@ -29,21 +32,22 @@ public class FuncFichaTecnica {
 			}
 		}
 		else {
-			System.out.println("Opção inválida, voltando ao menu...");
+			System.out.println("\nOpção inválida");
 		}
 		FuncUtentes.atualizarfileU(u);
 	}
 	
 	public static void Alergias(ArrayList<Utente> u, int i) {
-		System.out.println("Alergias: " + u.get(i).getFT().getAlergias().toString());
-		System.out.println("Deseja adicionar ou remover Alergias? (adicionar/remover)");
+		System.out.println("\nDeseja adicionar ou remover Alergias? (adicionar/remover)");
 		System.out.println("1 - Adicionar");
 		System.out.println("2 - Remover");
 		int opcao = Ler.umInt();
-		System.out.println("Quantas?");
-		int nm = Ler.umInt();
-
+		int nm;
+	
 		if (opcao == 1) {
+			System.out.println("Quantas?");
+			nm = Ler.umInt();
+
 			for (int j = 1; j <= nm; j++) {
 				if (j == 1) {
 					System.out.println(
@@ -54,6 +58,9 @@ public class FuncFichaTecnica {
 				
 			}
 		} else if (opcao == 2) {
+			System.out.println("Quantas?");
+			nm = Ler.umInt();
+
 			for (int j = 1; j <= nm; j++) {
 				if (j == 1) {
 					System.out.println("Insira as alergias: ");
@@ -63,7 +70,7 @@ public class FuncFichaTecnica {
 			}
 		}
 		else {
-			System.out.println("Opção inválida, voltando ao menu...");
+			System.out.println("\nOpção inválida");
 		}
 		FuncUtentes.atualizarfileU(u);
 	}

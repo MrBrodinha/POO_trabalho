@@ -99,21 +99,21 @@ public class MainClinicaMédica {
 							System.out.println("------------------------------------------------------------");
 							menu.utentes(utentes);
 							System.out.println("------------------------------------------------------------");
-							System.out.println("Insira o NUS do utente a que deseja marcar a consulta");
+							System.out.println("Insira o NUS do Utente a que deseja marcar a consulta:");
 							NUS = Ler.umLong();
 							for (int i = 0; i < utentes.size(); i++) {
 								if (utentes.get(i).getNUS() == NUS) {
 									ui = i;
 									i = utentes.size();
 								}
-							} // for
+							}
 
 							if (ui != -1) {
 								System.out.println();
 								System.out.println("------------------------------------------------------------");
 								menu.profissionais(profissionais);
 								System.out.println("------------------------------------------------------------");
-								System.out.println("Insira o numero do Profissional que vai realizar a consulta");
+								System.out.println("Insira o numero do Profissional que vai realizar a consulta:");
 								long numero = Ler.umLong();
 								for (int i = 0; i < profissionais.size(); i++) {
 									if (profissionais.get(i).getNumero() == numero) {
@@ -121,7 +121,7 @@ public class MainClinicaMédica {
 										i = profissionais.size();
 									} else if (profissionais.size() - 1 == i) {
 										System.out.println(
-												"Inseriu o número de um profissional inexistente, voltando ao menu...");
+												"\nInseriu o número de um profissional inexistente");
 										pi = -1;
 									}
 								}
@@ -137,7 +137,7 @@ public class MainClinicaMédica {
 							} // if(ui != -1)
 
 							else {
-								System.out.println("NUS inválido!");
+								System.out.println("\nInseriu o NUS de um Utente inexistente");
 							}
 							break;
 						case 2:
@@ -145,7 +145,7 @@ public class MainClinicaMédica {
 							System.out.println("------------------------------------------------------------");
 							menu.utentes(utentes);
 							System.out.println("------------------------------------------------------------");
-							System.out.println("Insira o NUS do utente a que deseja desmarcar a consulta");
+							System.out.println("Insira o NUS do utente a que deseja desmarcar a consulta:");
 							NUS = Ler.umLong();
 
 							ui = -1;
@@ -157,23 +157,23 @@ public class MainClinicaMédica {
 							if (ui != -1 && utentes.get(ui).getFT().getConsultas().size() != 0) {
 								FuncConsulta.removerC(consultas, utentes, ui, profissionais);
 							} else if (ui == -1) {
-								System.out.println("\nInseriu um NUS inválido!");
+								System.out.println("\nInseriu o NUS de um Utente inexistente");
 							} else {
-								System.out.println("\nO Utente não tem consultas marcadas!");
+								System.out.println("\nO Utente não tem consultas marcadas");
 							}
 							break;
 						case 3:
 							sair2 = true;
 							break;
 						default:
-							System.out.println("Opção Inválida");
+							System.out.println("\nOpção Inválida");
 							break;
 						}
 
 					}
 				} else {
 					System.out.println(
-							"Não existem Utentes ou Profissionais suficientes nesta Clinica para marcar Consulta");
+							"\nNão existem Utentes ou Profissionais suficientes nesta Clinica para marcar Consulta");
 				}
 				break;
 
@@ -193,7 +193,7 @@ public class MainClinicaMédica {
 							System.out.println("------------------------------------------------------------");
 							menu.utentes(utentes);
 							System.out.println("------------------------------------------------------------");
-							System.out.println("Insira o NUS do utente a que deseja realizar operações");
+							System.out.println("Insira o NUS do utente a que deseja realizar operações:");
 							NUS = Ler.umLong();
 
 							sair3 = false;
@@ -221,6 +221,7 @@ public class MainClinicaMédica {
 										switch (opcao3) {
 										case 1:
 											utentes.remove(i);
+											System.out.println("Utente removido com sucesso!");
 											FuncUtentes.atualizarfileU(utentes);
 											sair3 = true;
 											break;
@@ -231,19 +232,20 @@ public class MainClinicaMédica {
 
 										case 3:
 											if (profissionais.size() != 0) {
-												System.out.println("Qual o número do Profissional?");
+												menu.profissionais(profissionais);
+												System.out.println("Insira o número do Profissional que vai se tornar Médico de Familia:");
 												int n = Ler.umInt();
 
 												for (int j = 0; j < profissionais.size(); j++) {
 													if (profissionais.get(j).getNumero() == n) {
 														utentes.get(i).setMedicoFamilia(profissionais.get(j));
 													} else if (j == profissionais.size() - 1) {
-														System.out.println("Tal Profissional não existe");
+														System.out.println("Inseriu o número de um Profissional inexistente");
 													}
 												}
 											} else {
 												System.out.println(
-														"\nA lista de Profissionais encontrasse de momento vazia!");
+														"\nA lista de Profissionais encontrasse de momento vazia");
 											}
 											break;
 
@@ -270,19 +272,19 @@ public class MainClinicaMédica {
 													sair4 = true;
 													break;
 												default:
-													System.out.println("Opção inválida!");
+													System.out.println("Opção inválida");
 													break;
 
 												}
+												System.out.println();
 											}
 											break;
 										case 5:
+											System.out.println();
 											System.out.println(
 													"------------------------------------------------------------");
 											System.out.println("Futuras Consultas: "
 													+ utentes.get(i).getFT().getConsultas().toString());
-											System.out.println(
-													"------------------------------------------------------------");
 											break;
 										case 6:
 											sair3 = true;
@@ -296,8 +298,12 @@ public class MainClinicaMédica {
 									}
 									break;
 								}
+								else {
+									System.out.println("\nInseriu o NUS de um Utente inexistente");
+								}
 							}
 						} else {
+							System.out.println();
 							System.out.println("Opção Inválida");
 						}
 						break;
@@ -305,7 +311,8 @@ public class MainClinicaMédica {
 						sair2 = true;
 						break;
 					default:
-						System.out.println("Opção inválida!");
+						System.out.println();
+						System.out.println("Opção inválida");
 						break;
 					}
 				}
@@ -350,25 +357,28 @@ public class MainClinicaMédica {
 										switch (opcao3) {
 										case 1:
 											profissionais.remove(i);
+											System.out.println("Profissional removido com sucesso!");
 											FuncProfissional.atualizarfileP(profissionais);
 											sair3 = true;
 											break;
 										case 2:
 											FuncProfissional.editarnomeP(profissionais, i);
+											System.out.println();
 											break;
 										case 3:
 											FuncProfissional.editarSalario(profissionais, i);
+											System.out.println();
 											break;
 										case 4:
 											FuncProfissional.hab(profissionais, i);
+											System.out.println();
 											break;
 										case 5:
+											System.out.println();
 											System.out.println(
 													"------------------------------------------------------------");
 											System.out.println("Futuras Consultas: "
 													+ profissionais.get(i).getConsultas().toString());
-											System.out.println(
-													"------------------------------------------------------------");
 											break;
 										case 6:
 											sair3 = true;
@@ -380,18 +390,33 @@ public class MainClinicaMédica {
 										}
 									}
 								}
+								else {
+									System.out.println("\nInseriu o número de um Profissional inexistente");
+								}
 							}
 
 						} else {
+							System.out.println();
 							System.out.println("Opcão Inválida");
 						}
 						break;
 					case 3:
 						sair2 = true;
+					default:
+						System.out.println();
+						System.out.println("Opcão Inválida");
+						break;
 					}
 				}
 				break;
+			case 4:
+				System.out.println("Estatísticas:");
+				FuncUtentes.NrHeM(utentes);
+				FuncProfissional.biggestG(profissionais);
+				FuncProfissional.maisHab(profissionais);
+				break;
 			case 5:
+				System.out.println(consultas.toString());
 				break;
 			case 6:
 				sair1 = true;

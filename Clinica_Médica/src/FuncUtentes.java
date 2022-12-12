@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class FuncUtentes {
 	public static void adicionarU(ArrayList<Utente> u) {
 		boolean end_loop = false;
-		System.out.println("Insira o nome do Utente:");
+		System.out.println("\nInsira o nome do Utente:");
 		String nome = Ler.umaString();
 
 		System.out.println("Insira o Nº de Utente de Sáude:");
@@ -14,7 +14,7 @@ public class FuncUtentes {
 
 		for (int i = 0; i < u.size(); i++) {
 			if (u.get(i).getNUS() == NUS) {
-				System.out.println("Utente com este Nº de Utente de Sáude já existe, voltando ao menu...");
+				System.out.println("Utente com este Nº de Utente de Sáude já existe");
 				return;
 			}
 		}
@@ -34,23 +34,10 @@ public class FuncUtentes {
 		atualizarfileU(u);
 	}
 
-	public static void NrHeM(ArrayList<Utente> u) {
-		int macho = 0;
-		int femia = 0;
-		for (int i = 0; i < u.size(); i++) {
-			if (u.get(i).getGenero() == 'M') {
-				macho++;
-			} else {
-				femia++;
-			}
-			System.out.println("Existem " + macho + " homens na clinica e " + femia + " mulheres");
-		}
-	}
-
 	public static void editarU(ArrayList<Utente> u, int ind) {
 		boolean end_loop = false;
 
-		System.out.println("Insira o novo nome do Utente:");
+		System.out.println("\nInsira o novo nome do Utente:");
 		String nome = Ler.umaString();
 
 		System.out.println("Insira o novo Nº de Utente de Sáude:");
@@ -68,9 +55,23 @@ public class FuncUtentes {
 		}
 		u.get(ind).setNome(nome);
 		u.get(ind).setNUS(NUS);
-		u.get(ind).setGenero(genero);
+		u.get(ind).setGenero(Character.toUpperCase(genero));
 
 		atualizarfileU(u);
+	}
+	
+	//Número de homens e mulheres
+	public static void NrHeM(ArrayList<Utente> u) {
+		int macho = 0;
+		int femia = 0;
+		for (int i = 0; i < u.size(); i++) {
+			if (u.get(i).getGenero() == 'M') {
+				macho++;
+			} else {
+				femia++;
+			}
+			System.out.println("Nesta Clínica exitem: " +  macho + " homens e " + femia + " mulheres\n");
+		}
 	}
 
 	public static void atualizarfileU(ArrayList<Utente> u) {
