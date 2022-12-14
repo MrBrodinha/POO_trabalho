@@ -4,7 +4,7 @@ import java.io.ObjectInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class MainClinicaMédica {
+public class MainCM {
 	@SuppressWarnings({ "unchecked", "resource" })
 	public static void main(String[] args) {
 		ArrayList<Consulta> consultas = new ArrayList<>();
@@ -51,8 +51,8 @@ public class MainClinicaMédica {
 			for (int j = 0; j < utentes.get(i).getFT().getConsultas().size(); j++) {
 				if (utentes.get(i).getFT().getConsultas().get(j).getData().isBefore(LocalDateTime.now())) {
 					utentes.get(i).getFT().removeConsulta(j);
-					FuncUtentes.atualizarfileU(utentes);
 					contadoru++;
+					FuncUtentes.atualizarfileU(utentes);
 				}
 			}
 		}
@@ -61,9 +61,8 @@ public class MainClinicaMédica {
 			for (int j = 0; j < profissionais.get(i).getConsultas().size(); j++) {
 				if (profissionais.get(i).getConsultas().get(j).getData().isBefore(LocalDateTime.now())) {
 					profissionais.get(i).getConsultas().remove(j);
-					FuncProfissional.atualizarfileP(profissionais);
 					contadorp++;
-					FuncConsulta.atualizarfileC(consultas);
+					FuncProfissional.atualizarfileP(profissionais);
 				}
 			}
 		}
@@ -71,6 +70,7 @@ public class MainClinicaMédica {
 		for (int i = 0; i < consultas.size(); i++) {
 			if (consultas.get(i).getData().isBefore(LocalDateTime.now())) {
 				consultas.remove(i);
+				FuncConsulta.atualizarfileC(consultas);
 
 			}
 		}
@@ -345,6 +345,7 @@ public class MainClinicaMédica {
 										System.out.println(
 												"------------------------------------------------------------");
 										System.out.println("Nome: " + profissionais.get(i).getNome());
+										System.out.println("Género: " + profissionais.get(i).getGenero());
 										System.out.println("Salário: " + profissionais.get(i).getSalario());
 										System.out.println("Número: " + profissionais.get(i).getNumero());
 										System.out.println("Habilitações: " + profissionais.get(i).getHab().toString());

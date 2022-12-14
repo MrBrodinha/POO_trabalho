@@ -4,14 +4,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class FuncUtentes {
+	
+	//Adicionar Utentes
 	public static void adicionarU(ArrayList<Utente> u) {
 		boolean end_loop = false;
-		System.out.println("\nInsira o nome do Utente:");
+		System.out.println("\nInsira o nome do Utente:"); // Nome Utente
 		String nome = Ler.umaString();
 
-		System.out.println("Insira o Nº de Utente de Sáude:");
+		System.out.println("Insira o Nº de Utente de Sáude:"); //NUS Utente
 		long NUS = Ler.umLong();
 
+		// Como NUS é único, verifica se o NUS é inexistente na lista de Utentes
 		for (int i = 0; i < u.size(); i++) {
 			if (u.get(i).getNUS() == NUS) {
 				System.out.println("Utente com este Nº de Utente de Sáude já existe");
@@ -19,7 +22,7 @@ public class FuncUtentes {
 			}
 		}
 
-		System.out.println("Insira o género do Utente: (M/F)");
+		System.out.println("Insira o género do Utente: (M/F)"); //Género do Utente
 		char genero = 'l';
 		while (!end_loop) {
 			genero = Ler.umChar();
@@ -29,7 +32,7 @@ public class FuncUtentes {
 				end_loop = true;
 			}
 		}
-		u.add(new Utente(nome, NUS, genero));
+		u.add(new Utente(new Pessoa(nome, genero), NUS));
 
 		atualizarfileU(u);
 	}

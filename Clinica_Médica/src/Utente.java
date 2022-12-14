@@ -1,35 +1,16 @@
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Utente implements Serializable {
-	private String nome;
-	private char genero; // F ou M
-	private long NUS; // nº de utente de saúde;
+public class Utente extends Pessoa implements Serializable {
+	private long NUS;
 	private Profissional medico_familia;
 	private Ficha_Tecnica ft;
 
-	public Utente(String nome, long NUS, char genero) {
-		this.nome = nome;
-		this.NUS = NUS;
-		this.genero = genero;
+	public Utente(Pessoa p, long NUS) {
+		super(p.nome, p.genero);
 		medico_familia = new Profissional();
-		ft = new Ficha_Tecnica(nome, NUS);
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public char getGenero() {
-		return genero;
-	}
-
-	public void setGenero(char genero) {
-		this.genero = genero;
+		this.NUS = NUS;
+		ft = new Ficha_Tecnica(new Pessoa(p.nome, p.genero), NUS);
 	}
 
 	public long getNUS() {
@@ -58,20 +39,20 @@ public class Utente implements Serializable {
 
 	// mexer no final quando tiver tudo mais feito
 	public String toString() {
-		return "NUS: " + NUS + ", Nome: " + nome + ", Género: " + genero;
+		return "NUS: " + NUS + ", Nome: " + super.nome + ", Género: " + super.genero;
 	}
 
 	public boolean equals(Object obj) {
 		if (obj != null && obj.getClass() == this.getClass()) {
 			Utente temp = (Utente) obj;
-			return nome.equals(temp.nome) && NUS == temp.NUS && genero == temp.genero
+			return super.equals(temp) && NUS == temp.NUS
 					&& medico_familia.equals(temp.medico_familia) && ft.equals(temp.ft);
 		}
 		return false;
 	}
 
 	public Object clone() {
-		Utente temp = new Utente(nome, NUS, genero);
+		Utente temp = new Utente(new Pessoa(super.nome, super.genero), NUS);
 		temp.medico_familia = (Profissional) medico_familia.clone();
 		temp.ft = (Ficha_Tecnica) ft.clone();
 		return temp;

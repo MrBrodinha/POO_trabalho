@@ -2,34 +2,34 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class Profissional implements Serializable {
+public class Profissional extends Pessoa implements Serializable {
 	private static int ultimo = 0; // número profissional
 	private long numero;
-	private String nome;
 	private float salario;
 	private ArrayList<String> hab; // Habilitações
 	private ArrayList<Consulta> consultas;
 
 	public Profissional() {
+		super();
 		numero = 0;
-		nome = "";
+		salario = 0;
 		hab = new ArrayList<>();
 		consultas = new ArrayList<>();
-		salario = 0;
 	}
-
-	public Profissional(String nome, float salario) {
+	
+	public Profissional(Pessoa p, float salario) {
+		super(p.nome, p.genero);
 		numero = ++ultimo;
 		this.salario = salario;
-		this.nome = nome;
 		hab = new ArrayList<>();
 		consultas = new ArrayList<>();
 	}
 
+	//Adicionar consultas
 	public void addConsulta(Consulta c) {
 		consultas.add(c);
 
-		// reordenar por ordem da data
+		//Reordenar por ordem da data
 		for (int i = 0; i < consultas.size(); i++) {
 			for (int j = 0; j < consultas.size(); j++) {
 				if (consultas.get(j).getData().isAfter(consultas.get(i).getData())) {
@@ -40,17 +40,20 @@ public class Profissional implements Serializable {
 			}
 		}
 	}
-
+	
+	//Remover consultas
 	public void removeConsulta(int i) {
 		consultas.remove(i);
 	}
 
+	//Adicionar Habilitações
 	public void addHab(String h) {
 		if (!hab.contains(h)) {
 			hab.add(h);
 		}
 	}
-
+	
+	//Remover Habilitações
 	public void removerHab(String h) {
 		for (int i = 0; i < hab.size(); i++) {
 			if (hab.get(i).contains(h)) {
@@ -83,14 +86,6 @@ public class Profissional implements Serializable {
 		this.numero = numero;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public ArrayList<String> getHab() {
 		return hab;
 	}
@@ -110,27 +105,28 @@ public class Profissional implements Serializable {
 	}
 
 	public String toString() {
-		return "Número: " + numero + ", Nome: " + nome + ", Salário: " + salario + "\nHabilitações: " + hab.toString();
+		return "Número: " + numero + ", Nome: " + nome + ", Género: " + genero +  "\nSalário: " + salario + "\nHabilitações: " + hab.toString();
 	}
 
 	public boolean equals(Object obj) {
 		if (obj != null && obj.getClass() == this.getClass()) {
 			Profissional temp = (Profissional) obj;
-			return nome.equals(temp.nome) && numero == temp.numero && hab.equals(temp.hab)
-					&& consultas.equals(temp.consultas) && salario == temp.salario;
+			return super.equals(temp) && hab.equals(temp.hab)
+					&& consultas.equals(temp.consultas) && salario == temp.salario && numero == temp.numero;
 		}
 		return false;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Object clone() {
+		//Guardamos a variável static Ultimo porque quando criamos um clone, incremente sempre um valor
 		int ultimo = Profissional.getUltimo();
-		Profissional temp = new Profissional(nome, salario);
+		Profissional temp = new Profissional(new Pessoa(super.nome, super.genero), salario);
 		temp.hab = (ArrayList<String>) hab.clone();
 		temp.consultas = (ArrayList<Consulta>) consultas.clone();
 		temp.numero = numero;
 		temp.salario = salario;
-		Profissional.setUltimo(ultimo);
+		Profissional.setUltimo(ultimo); //Metemos a variável static outra vez a "ultimo" para os números seguirem naturalmente
 		return temp;
 	}
 }

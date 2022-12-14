@@ -2,16 +2,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 @SuppressWarnings("serial")
-public class Ficha_Tecnica implements Serializable {
+public class Ficha_Tecnica extends Pessoa implements Serializable {
 	ArrayList<String> alergias;
 	ArrayList<Consulta> consultas;
 	ArrayList<String> medicamentos;
 	long NUS;
-	String nome;
 
-	public Ficha_Tecnica(String nome, long NUS) {
+	public Ficha_Tecnica(Pessoa p, long NUS) {
+		super(p.nome, p.genero);
 		this.NUS = NUS;
-		this.nome = nome;
 		alergias = new ArrayList<>();
 		consultas = new ArrayList<>();
 		medicamentos = new ArrayList<>();
@@ -27,22 +26,23 @@ public class Ficha_Tecnica implements Serializable {
 
 	public void addConsulta(Consulta c) {
 		consultas.add(c);
-		
-		//reordenar por ordem da data
-		for(int i = 0; i < consultas.size(); i++) {
-			for(int j = 0; j < consultas.size(); j++) {
-			if(consultas.get(j).getData().isAfter(consultas.get(i).getData())) {
-				Consulta temp = consultas.get(i);
-				consultas.set(i, consultas.get(j));
-				consultas.set(j, temp);
+
+		// reordenar por ordem da data
+		for (int i = 0; i < consultas.size(); i++) {
+			for (int j = 0; j < consultas.size(); j++) {
+				if (consultas.get(j).getData().isAfter(consultas.get(i).getData())) {
+					Consulta temp = consultas.get(i);
+					consultas.set(i, consultas.get(j));
+					consultas.set(j, temp);
 				}
 			}
 		}
 	}
-	
+
 	public void removeConsulta(int i) {
 		consultas.remove(i);
 	}
+
 	public void addMedicamentos(String m) {
 		if (!medicamentos.contains(m.toUpperCase())) {
 			medicamentos.add(m.toUpperCase());
@@ -54,7 +54,7 @@ public class Ficha_Tecnica implements Serializable {
 			alergias.add(a.toUpperCase());
 		}
 	}
-	
+
 	public void removeMedicamentos(String m) {
 		if (medicamentos.contains(m.toUpperCase())) {
 			medicamentos.remove(m.toUpperCase());
@@ -99,22 +99,24 @@ public class Ficha_Tecnica implements Serializable {
 	};
 
 	public String toString() {
-		return "Nome: " + nome + ", NUS: " + NUS + "\nAlergias: " + alergias.toString() + "\nMedicamentos: "
-				+ medicamentos.toString() + "\nConsultas: " + consultas.toString();
+		return "Nome: " + super.nome + ", NUS: " + NUS + ", género: " + super.genero + "\nAlergias: "
+				+ alergias.toString() + "\nMedicamentos: " + medicamentos.toString() + "\nConsultas: "
+				+ consultas.toString();
 	}
 
 	public boolean equals(Object obj) {
 		if (obj != null && obj.getClass() == this.getClass()) {
 			Ficha_Tecnica temp = (Ficha_Tecnica) obj;
 			return alergias.equals(temp.alergias) && consultas.equals(temp.consultas)
-					&& medicamentos.equals(temp.medicamentos) && NUS == temp.NUS && nome.equals(temp.nome);
+					&& medicamentos.equals(temp.medicamentos) && NUS == temp.NUS && super.nome.equals(temp.nome)
+					&& super.genero == temp.genero;
 		}
 		return false;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Object clone() {
-		Ficha_Tecnica temp = new Ficha_Tecnica(nome, NUS);
+		Ficha_Tecnica temp = new Ficha_Tecnica(new Pessoa(super.nome, super.genero), NUS);
 		temp.alergias = (ArrayList<String>) alergias.clone();
 		temp.consultas = (ArrayList<Consulta>) consultas.clone();
 		temp.medicamentos = (ArrayList<String>) medicamentos.clone();
