@@ -397,24 +397,26 @@ public class MainCM {
 							}
 
 						} else {
-							System.out.println();
-							System.out.println("Opcão Inválida");
+							System.out.println("\nOpcão Inválida");
 						}
 						break;
 					case 3:
 						sair2 = true;
 					default:
-						System.out.println();
-						System.out.println("Opcão Inválida");
+						System.out.println("\nOpcão Inválida");
 						break;
 					}
 				}
 				break;
 			case 4:
-				System.out.println("Estatísticas:");
-				FuncUtentes.NrHeM(utentes);
-				FuncProfissional.biggestG(profissionais);
-				FuncProfissional.maisHab(profissionais);
+				System.out.println("\nEstatísticas:");
+				if(utentes.size() != 0)
+					FuncUtentes.NrHeM(utentes);
+				
+				if(profissionais.size() != 0) {
+					FuncProfissional.biggestG(profissionais);
+					FuncProfissional.maisHab(profissionais);
+				}
 				break;
 			case 5:
 				System.out.println(consultas.toString());
