@@ -28,20 +28,16 @@ public class menu {
 		System.out.println("1 - Remover Utente");
 		System.out.println("2 - Editar informaçoes do Utente");
 		System.out.println("3 - Adicionar Médico de Família (Profissional)");
-		System.out.println();
-		System.out.println("4 - Operações com a Ficha Técnica deste Utente");
-		System.out.println();
-		System.out.println("5 - Futuras Consultas");
-		System.out.println();
-		System.out.println("6 - Voltar atrás");
+		System.out.println("\n4 - Operações com a Ficha Técnica deste Utente");
+		System.out.println("\n5 - Futuras Consultas");
+		System.out.println("\n6 - Voltar atrás");
 	}
 
 	public static void ft1() {
 		System.out.println("Que operações deseja realizar com a Ficha Técnica");
 		System.out.println("1 - Adicionar/Remover medicamentos");
 		System.out.println("2 - Adicionar/Remover alergias");
-		System.out.println();
-		System.out.println("3 - Voltar atrás");
+		System.out.println("\n3 - Voltar atrás");
 		System.out.println("AVISO: Para marcar/desmarcar consultas é no menu principal");
 	}
 
@@ -49,8 +45,7 @@ public class menu {
 		System.out.println("\nQuer marcar ou desmarcar uma consulta?");
 		System.out.println("1 - Marcar");
 		System.out.println("2 - Desmarcar");
-		System.out.println();
-		System.out.println("3 - Voltar Atrás");
+		System.out.println("\n3 - Voltar Atrás");
 	}
 
 	public static void Profissional1(ArrayList<Profissional> p) {
@@ -60,8 +55,7 @@ public class menu {
 		if (p.size() != 0) {
 			System.out.println("2 - Editar Profissional");
 		}
-		System.out.println();
-		System.out.println("3 - Voltar Atrás");
+		System.out.println("\n3 - Voltar Atrás");
 	}
 
 	public static void Profissional2() {
@@ -70,12 +64,11 @@ public class menu {
 		System.out.println("2 - Alterar o nome a Profissional");
 		System.out.println("3 - Alterar Salário do Profissional");
 		System.out.println("4 - Adicionar/Remover Habilitações a Profissional");
-		System.out.println();
-		System.out.println("5 - Consultas Consultas");
-		System.out.println();
-		System.out.println("6 - Voltar atrás");
+		System.out.println("\n5 - Consultas Consultas");
+		System.out.println("\n6 - Voltar atrás");
 	}
-
+	
+	//printf de todos os utentes
 	public static void utentes(ArrayList<Utente> u) {
 		System.out.println("Utentes:");
 		for (int i = 0; i < u.size(); i++) {
@@ -83,6 +76,7 @@ public class menu {
 		}
 	}
 
+	//printf de todos os profissionais
 	public static void profissionais(ArrayList<Profissional> p) {
 		for (int i = 0; i < p.size(); i++) {
 			System.out.println(p.get(i).toString());

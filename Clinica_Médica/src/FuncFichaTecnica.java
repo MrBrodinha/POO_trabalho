@@ -46,7 +46,7 @@ public class FuncFichaTecnica {
 		System.out.println("1 - Adicionar");
 		System.out.println("2 - Remover");
 		int opcao = Ler.umInt();
-		int nm; //Quantidade de alerigas a ser adicionada/removida
+		int nm; //Quantidade de alergias a ser adicionada/removida
 	
 		if (opcao == 1) {
 			System.out.println("Quantas?");
