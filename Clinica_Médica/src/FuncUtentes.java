@@ -43,8 +43,17 @@ public class FuncUtentes {
 		System.out.println("\nInsira o novo nome do Utente:");
 		String nome = Ler.umaString();
 
-		System.out.println("Insira o novo Nº de Utente de Sáude:");
+		
+		System.out.println("Insira o novo Nº de Utente de Sáude:"); //NUS Utente
 		long NUS = Ler.umLong();
+
+		// Como NUS é único, verifica se o NUS é inexistente na lista de Utentes
+		for (int i = 0; i < u.size(); i++) {
+			if (u.get(i).getNUS() == NUS) {
+				System.out.println("Utente com este Nº de Utente de Sáude já existe");
+				return;
+			}
+		}
 
 		System.out.println("Insira o novo género do Utente: (M/F)");
 		char genero = 'l';

@@ -22,7 +22,7 @@ public class FuncProfissional {
 			}
 		}
 
-		System.out.println("Insira o Salário do Profissional: "); // Salário do Profissional
+		System.out.println("\nInsira o Salário do Profissional: "); // Salário do Profissional
 		float sal = Ler.umFloat();
 
 		p.add(new Profissional(new Pessoa(nomeP, genero), sal)); // Adicionar à lista profissionais na Main
@@ -36,7 +36,6 @@ public class FuncProfissional {
 	public static void editarnomeP(ArrayList<Profissional> p, int pi) {
 		System.out.println("\nInsira o novo nome de Profissional:"); // Nome do Profissional
 		String nome = Ler.umaString();
-
 		p.get(pi).setNome(nome);
 
 		atualizarfileP(p);
